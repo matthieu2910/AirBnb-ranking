@@ -1,0 +1,23 @@
+Fichiers créés pour le déploiement Netlify - À committer sur GitHub
+====================================================================
+
+FICHIERS PRINCIPAUX:
+- index.html
+- netlify-demo.toml
+- .netlifyignore
+
+DOCUMENTATION:
+- DEPLOIEMENT-NETLIFY.md
+- QUICK-START-NETLIFY.md
+- README-AIRBNB-RANKING.md
+- COMMIT-NOW.md (ce fichier)
+
+SCRIPTS:
+- commit-et-push.bat
+
+TOTAL: 8 nouveaux fichiers
+
+Message de commit suggéré:
+"Add Netlify deployment configuration and documentation"
+
+

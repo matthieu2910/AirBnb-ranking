@@ -1,0 +1,51 @@
+LISTE DES FICHIERS A COMMITTER
+================================
+
+FICHIERS API ET ANALYSE:
+------------------------
+api_analyse.py
+analyse_airbnb_ameliore.py
+analyse_airbnb.py
+analyse_airbnb_selenium.py
+requirements_api.txt
+requirements_analyse.txt
+
+PAGES WEB:
+----------
+resultats_analyse.html
+
+CONFIGURATION:
+--------------
+.netlifyignore
+.gitignore
+
+DOCUMENTATION:
+--------------
+README-INTEGRATION.md
+DEMARRAGE-API.md
+RESUME-INTEGRATION.md
+RAPPORT-TEST-ANALYSE.md
+README-ANALYSE-AIRBNB.md
+QUICK-START-NETLIFY.md
+DEPLOIEMENT-NETLIFY.md
+test_analyse.py
+AJOUTER-AU-REPO.md
+VERIFIER-REPO-GITHUB.md
+COMMIT-GITHUB.md
+
+MAQUETTE MISE A JOUR:
+---------------------
+maquette-airbnb-ranking.html
+
+TOTAL: 22 fichiers
+
+MESSAGE DE COMMIT SUGGERE:
+--------------------------
+Add API d'analyse Airbnb et intégration complète
+
+- API Flask pour l'analyse d'annonces Airbnb
+- Scripts d'analyse améliorés avec cache et validation
+- Page de résultats HTML
+- Documentation complète
+- Intégration dans la maquette
+

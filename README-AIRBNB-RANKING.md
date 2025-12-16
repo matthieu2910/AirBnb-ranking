@@ -31,3 +31,4 @@ Ou utiliser le fichier batch `ouvrir-maquette.bat` pour ouvrir automatiquement.
 - Responsive design
 - Images de fond depuis Unsplash (libres de droit)
 
+

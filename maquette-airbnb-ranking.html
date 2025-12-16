@@ -1499,16 +1499,22 @@
         // Gestion du formulaire d'analyse
         document.getElementById('analyse-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const url = document.getElementById('airbnb-url').value;
+            const url = document.getElementById('airbnb-url').value.trim();
             
-            // Validation basique de l'URL Airbnb
-            if (url && (url.includes('airbnb') || url.includes('abnb'))) {
-                // Ici, vous pouvez ajouter la logique pour envoyer l'URL au backend
-                alert('Analyse en cours...\n\nURL: ' + url + '\n\n(En production, cette URL serait envoyée au serveur pour analyse)');
-                // window.location.href = '/analyse?url=' + encodeURIComponent(url);
-            } else {
-                alert('Veuillez entrer une URL Airbnb valide');
+            // Validation de l'URL Airbnb
+            if (!url) {
+                alert('Veuillez entrer une URL Airbnb');
+                return;
             }
+            
+            if (!url.includes('airbnb') && !url.includes('abnb')) {
+                alert('Veuillez entrer une URL Airbnb valide (doit contenir "airbnb")');
+                return;
+            }
+            
+            // Rediriger vers la page de résultats avec l'URL en paramètre
+            const resultatsUrl = 'resultats_analyse.html?url=' + encodeURIComponent(url);
+            window.location.href = resultatsUrl;
         });
     </script>
 </body>

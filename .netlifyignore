@@ -1,0 +1,31 @@
+# Fichiers à ignorer lors du déploiement Netlify (version demo)
+
+# Projet Next.js (si présent)
+.next/
+node_modules/
+src/
+content/
+admin/
+
+# Fichiers de développement et documentation
+*.bat
+*.md
+!README-AIRBNB-RANKING.md
+
+# Configuration (garder netlify-demo.toml)
+netlify.toml
+package.json
+package-lock.json
+tsconfig.json
+next.config.js
+postcss.config.js
+tailwind.config.ts
+
+# Autres
+.git/
+.gitignore
+.idea/
+.vscode/
+INSTRUCTIONS-GITHUB.md
+DEPLOIEMENT-NETLIFY.md
+
