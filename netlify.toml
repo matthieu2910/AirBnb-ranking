@@ -1,6 +1,19 @@
-[build]
-  command = "npm run build"
-  publish = ".next"
+# Configuration Netlify pour Airbnb Ranking Valais
+# Site HTML statique - Pas de build nécessaire
 
-[build.environment]
-  NODE_VERSION = "18"
+[build]
+  publish = "."
+  command = "echo 'No build needed for static HTML'"
+
+[[redirects]]
+  from = "/*"
+  to = "/maquette-airbnb-ranking.html"
+  status = 200
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
