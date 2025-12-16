@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résultats de l'analyse Airbnb</title>
+    <title>Résultats de l'analyse Airbnb - Mode Démo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -53,6 +53,18 @@
         .header h1 {
             font-size: 36px;
             margin-bottom: 10px;
+        }
+
+        .demo-banner {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .demo-banner strong {
+            color: #856404;
         }
 
         .section {
@@ -114,44 +126,6 @@
             font-size: 14px;
         }
 
-        .warning {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 4px;
-            color: #856404;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .loading-spinner {
-            border: 4px solid var(--medium-gray);
-            border-top: 4px solid var(--dark-green);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error {
-            background-color: #f8d7da;
-            border-left: 4px solid #dc3545;
-            padding: 20px;
-            border-radius: 4px;
-            color: #721c24;
-            margin: 20px 0;
-        }
-
         .btn {
             display: inline-block;
             background-color: var(--dark-green);
@@ -175,59 +149,45 @@
 </head>
 <body>
     <div class="container">
-        <div id="loading" class="loading">
-            <div class="loading-spinner"></div>
-            <p>Analyse en cours...</p>
+        <div class="demo-banner">
+            <strong>⚠️ Mode Démo</strong> - Cette analyse utilise des données d'exemple. Pour une analyse réelle, l'API backend doit être déployée.
         </div>
 
-        <div id="error" class="error" style="display: none;">
-            <h3>Erreur lors de l'analyse</h3>
-            <p id="error-message"></p>
-            <a href="maquette-airbnb-ranking.html" class="btn">Retour à l'accueil</a>
+        <div class="header">
+            <h1>📊 Rapport d'Analyse Airbnb</h1>
+            <p id="url-display"></p>
+            <p id="date-display"></p>
         </div>
 
-        <div id="results" style="display: none;">
-            <div class="header">
-                <h1>📊 Rapport d'Analyse Airbnb</h1>
-                <p id="url-display"></p>
-                <p id="date-display"></p>
+        <div class="section">
+            <h2>📍 Informations Principales</h2>
+            <div class="info-grid" id="infos-grid">
+                <!-- Rempli par JavaScript -->
             </div>
+        </div>
 
-            <div class="section">
-                <h2>📍 Informations Principales</h2>
-                <div class="info-grid" id="infos-grid">
-                    <!-- Rempli par JavaScript -->
-                </div>
-            </div>
+        <div class="section" id="description-section">
+            <h2>📝 Description</h2>
+            <p class="description-text" id="description-text"></p>
+        </div>
 
-            <div class="section" id="description-section" style="display: none;">
-                <h2>📝 Description</h2>
-                <p class="description-text" id="description-text"></p>
+        <div class="section" id="prix-section">
+            <h2>💰 Prix et Disponibilité</h2>
+            <div class="info-grid" id="prix-grid">
+                <!-- Rempli par JavaScript -->
             </div>
+        </div>
 
-            <div class="section" id="prix-section" style="display: none;">
-                <h2>💰 Prix et Disponibilité</h2>
-                <div class="info-grid" id="prix-grid">
-                    <!-- Rempli par JavaScript -->
-                </div>
+        <div class="section" id="qualite-section">
+            <h2>⭐ Éléments Qualitatifs</h2>
+            <div class="info-grid" id="qualite-grid">
+                <!-- Rempli par JavaScript -->
             </div>
+            <div id="equipements-container"></div>
+        </div>
 
-            <div class="section" id="qualite-section" style="display: none;">
-                <h2>⭐ Éléments Qualitatifs</h2>
-                <div class="info-grid" id="qualite-grid">
-                    <!-- Rempli par JavaScript -->
-                </div>
-                <div id="equipements-container"></div>
-            </div>
-
-            <div class="section" id="warnings-section" style="display: none;">
-                <h2>⚠️ Avertissements</h2>
-                <div id="warnings-container"></div>
-            </div>
-
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="maquette-airbnb-ranking.html" class="btn">Nouvelle analyse</a>
-            </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="maquette-airbnb-ranking.html" class="btn">Nouvelle analyse</a>
         </div>
     </div>
 
@@ -235,50 +195,40 @@
         // Récupérer l'URL depuis les paramètres
         const urlParams = new URLSearchParams(window.location.search);
         const url = urlParams.get('url');
-        const apiUrl = urlParams.get('api') || 'http://localhost:5000/analyse';
 
-        if (!url) {
-            showError('Aucune URL fournie');
-        } else {
-            analyserAnnonce(url);
-        }
-
-        async function analyserAnnonce(urlAirbnb) {
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ url: urlAirbnb })
-                });
-
-                const data = await response.json();
-
-                if (data.status === 'error') {
-                    showError(data.error || 'Erreur lors de l\'analyse');
-                    return;
-                }
-
-                if (data.status === 'success') {
-                    afficherResultats(data.data);
-                }
-            } catch (error) {
-                showError('Erreur de connexion à l\'API. Assurez-vous que le serveur Flask est démarré.');
-                console.error('Erreur:', error);
+        // Données d'exemple pour le mode démo
+        const demoData = {
+            url: url || 'https://www.airbnb.fr/rooms/1551342108913458049',
+            date_analyse: new Date().toISOString(),
+            infos_principales: {
+                localisation: 'Verbier, Valais, Suisse',
+                type_bien: 'Chalet',
+                nombre_chambres: 4,
+                capacite: 8,
+                superficie: '150 m²'
+            },
+            description: {
+                texte: 'Magnifique chalet situé à Verbier avec vue imprenable sur les montagnes. Idéal pour les amoureux de la montagne et du ski. Le chalet dispose de 4 chambres confortables, d\'une cuisine entièrement équipée, d\'un salon avec cheminée, et d\'un jacuzzi extérieur. Proche des remontées mécaniques et des commerces.'
+            },
+            prix_disponibilite: {
+                prix_nuit: 350,
+                prix_nuit_max: 650
+            },
+            qualite: {
+                note: 4.8,
+                nombre_avis: 127,
+                equipements: ['Jacuzzi', 'Cheminée', 'Parking', 'Wi-Fi', 'Vue', 'Terrasse', 'Cuisine équipée']
             }
-        }
+        };
+
+        // Afficher les résultats en mode démo
+        afficherResultats(demoData);
 
         function afficherResultats(data) {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('results').style.display = 'block';
-
             // Header
             document.getElementById('url-display').textContent = `URL: ${data.url}`;
-            if (data.date_analyse) {
-                const date = new Date(data.date_analyse);
-                document.getElementById('date-display').textContent = `Date d'analyse: ${date.toLocaleString('fr-FR')}`;
-            }
+            const date = new Date(data.date_analyse);
+            document.getElementById('date-display').textContent = `Date d'analyse: ${date.toLocaleString('fr-FR')}`;
 
             // Infos principales
             const infos = data.infos_principales || {};
@@ -320,6 +270,12 @@
                         <div class="info-label">💰 Prix par nuit</div>
                         <div class="info-value">${data.prix_disponibilite.prix_nuit} €</div>
                     </div>
+                    ${data.prix_disponibilite.prix_nuit_max ? `
+                    <div class="info-item">
+                        <div class="info-label">💰 Prix max (haute saison)</div>
+                        <div class="info-value">${data.prix_disponibilite.prix_nuit_max} €</div>
+                    </div>
+                    ` : ''}
                 `;
             }
 
@@ -362,25 +318,6 @@
                     });
                 }
             }
-
-            // Warnings
-            if (data.warnings && data.warnings.length > 0) {
-                document.getElementById('warnings-section').style.display = 'block';
-                const warningsContainer = document.getElementById('warnings-container');
-                warningsContainer.innerHTML = '';
-                data.warnings.forEach(warning => {
-                    const div = document.createElement('div');
-                    div.className = 'warning';
-                    div.textContent = warning;
-                    warningsContainer.appendChild(div);
-                });
-            }
-        }
-
-        function showError(message) {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('error').style.display = 'block';
-            document.getElementById('error-message').textContent = message;
         }
     </script>
 </body>
